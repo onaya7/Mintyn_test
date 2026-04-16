@@ -32,9 +32,10 @@ This project recreates key screens from the Mintyn mobile app using **Swift** an
 
 ## Architecture
 
-- **Pattern**: MVC (Model-View-Controller) — consistent with UIKit conventions
-- **Navigation**: `UITabBarController` with programmatic navigation
-- **UI**: Code-based UIKit (no SwiftUI)
+- **Pattern**: MVVM (Model-View-ViewModel) — ViewModels expose closure-based bindings; no Combine or RxSwift required
+- **Navigation**: Programmatic `UITabBarController`, no storyboards
+- **UI**: 100% code-based UIKit (no SwiftUI, no XIBs)
+- **Theming**: Adaptive `UIColor` tokens via `UIColor.init(dynamicProvider:)` for automatic dark/light mode switching
 - **Mock Auth**: Hardcoded credential validation; session state managed in-memory
 
 ---
@@ -46,21 +47,28 @@ Mintyn/
 ├── AppDelegate.swift
 ├── SceneDelegate.swift
 ├── Modules/
+│   ├── Welcome/
+│   │   ├── WelcomeViewController.swift
+│   │   └── WelcomeViewModel.swift
 │   ├── Auth/
-│   │   ├── LoginViewController.swift
-│   │   └── LoginViewModel.swift
+│   │   ├── LoginViewController.swift      (next)
+│   │   └── LoginViewModel.swift           (next)
 │   ├── Home/
-│   │   └── HomeViewController.swift
+│   │   └── HomeViewController.swift       (next)
 │   └── Settings/
-│       └── SettingsViewController.swift
+│       └── SettingsViewController.swift   (next)
 ├── Common/
-│   └── (Shared utilities, extensions)
+│   ├── Extensions/
+│   │   └── UIColor+Theme.swift
+│   └── Components/
+│       └── GradientButton.swift
 └── Resources/
     └── Assets.xcassets/
+        └── mintyn_logo (light + dark variants)
 MintynTests/
-└── (Unit Tests)
+└── (Unit Tests — added in later phase)
 MintynUITests/
-└── (UI Tests)
+└── (UI Tests — added in later phase)
 ```
 
 ---
@@ -111,4 +119,5 @@ See [SOLUTION.md](./SOLUTION.md) for a discussion of additional refactors, code 
 ---
 
 ## Author
+
 Submitted for Mintyn Bank iOS Developer Role — April 2026
